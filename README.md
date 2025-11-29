@@ -122,7 +122,6 @@ Set-MinPasswordLength -Length 14
 ```
 Screenshot:![](images/Screenshot_2025-11-28_135511.png)
 
-—
 ## **Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010**
 **Confirm noncompliance**
 ```
@@ -212,7 +211,7 @@ if ($netThreshold -ge $DesiredThreshold -and $seceditThreshold -ge $DesiredThres
 ```
 Screenshot: ![Screenshot](images/IMG_8452.jpeg)
 
-—
+
 ## **Guest account disabled - WN11-SO-000010**
 **Confirm noncompliance**
 ```
@@ -243,7 +242,7 @@ Write-Host "Applied: Guest account disabled"
 Screenshot: ![](images/Screenshot_2025-11-28_195613.png)
 
 
-—
+
 ## **Administrator account renamed (require NLA‑safe custom name) - WN11-SO-000020**
 **Confirm noncompliance**
 ```
@@ -324,7 +323,7 @@ Write-Host "Verification: Name='$($verify.Name)', SID='$($verify.SID)'"
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_201021.png)  
 
-—
+
 ## **Security event log size and overwrite policy - WN11-AU-000505**
 **Confirm noncompliance**
 ```
@@ -351,7 +350,7 @@ Write-Host ($info | Out-String)
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_201351.png)  
 
-—
+
 ## **Audit policy: logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)**
 **Confirm noncompliance**
 ```
@@ -395,7 +394,7 @@ Screenshot: ![](images/Screenshot_2025-11-28_201522.png)
 I initially tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.
 Screenshot: ![](images/Screenshot_2025-11-28_203934.png)  
 
-—
+
 ## **Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055**
 **Confirm noncompliance**
 ```
@@ -433,7 +432,7 @@ cmd /c "net accounts /maxpwage:60"
 Screenshot: ![](images/Screenshot_2025-11-28_221933.png)  
 
 
-—
+
 ## **SMBv1 disabled - WN11-00-000160**
 **Confirm noncompliance**
 ```
@@ -449,7 +448,7 @@ Write-Host "Applied: SMB1Protocol state is $($feature.State)"
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_210343.png)  
 
-—-
+
 ## **Autoplay Must Be Disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)**
 **Confirm noncompliance**
 ```
@@ -496,7 +495,7 @@ if ($value -eq 255) {
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_215111.png)  
 
-—
+
 ## **Screen saver timeout with secure lock (15 minutes) - WN11-SO-000070**
 **Confirm noncompliance**
 ```
