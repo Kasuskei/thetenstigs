@@ -391,7 +391,8 @@ if ($noncompliant.Count -eq 0) {
 Screenshot: ![](images/Screenshot_2025-11-28_201522.png)  
 
 **Remediate:**
-I initially tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.
+I initially tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.  
+  
 Screenshot: ![](images/Screenshot_2025-11-28_203934.png)  
 
 
