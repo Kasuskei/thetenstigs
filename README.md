@@ -1,8 +1,7 @@
 # Windows 11 STIG remediation scripts  
----  
 
-Password length policy (minimum 14) - WN11-AC-000035
-Confirm noncompliance
+## **Password length policy (minimum 14) - WN11-AC-000035**
+**Confirm noncompliance**
 ```
 # Confirm Minimum Password Length compliance
 # Exports local security policy and checks the MinimumPasswordLength setting
@@ -36,7 +35,7 @@ else {
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_135116.png)
 
-Remediate:
+**Remediate:**
 ```
 # Requires: Run as Administrator
 
@@ -124,8 +123,8 @@ Set-MinPasswordLength -Length 14
 Screenshot:![](images/Screenshot_2025-11-28_135511.png)
 
 —
-Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010
-Confirm noncompliance
+## **Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010**
+**Confirm noncompliance**
 ```
 # Checks LockoutBadCount via secedit export
 $TempInf = Join-Path $env:TEMP "secpol-export.inf"
@@ -145,7 +144,7 @@ Write-Host "Compliant: LockoutBadCount=$threshold"
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_194958.png)
 
-Remediate
+**Remediate:**
 ```
 # Remediate LockoutBadCount to 10 and verify
 param(
@@ -214,8 +213,8 @@ if ($netThreshold -ge $DesiredThreshold -and $seceditThreshold -ge $DesiredThres
 Screenshot: ![Screenshot](images/IMG_8452.jpeg)
 
 —
-Guest account disabled - WN11-SO-000010
-Confirm noncompliance
+## **Guest account disabled - WN11-SO-000010**
+**Confirm noncompliance**
 ```
 try {
     $guest = Get-LocalUser -Name "Guest" -ErrorAction Stop
@@ -231,7 +230,7 @@ try {
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_195546.png)
 
-Remediate
+**Remediate:**
 ```
 # Disables Guest account (creates if absent then disables for demo consistency)
 $guest = Get-LocalUser -Name "Guest" -ErrorAction SilentlyContinue
@@ -245,8 +244,8 @@ Screenshot: ![](images/Screenshot_2025-11-28_195613.png)
 
 
 —
-Administrator account renamed (require NLA‑safe custom name) - WN11-SO-000020
-Confirm noncompliance
+## **Administrator account renamed (require NLA‑safe custom name) - WN11-SO-000020**
+**Confirm noncompliance**
 ```
 # Checks if a local account with SID ending -500 (built-in Administrator) still uses name 'Administrator'
 $adminSID = (Get-CimInstance Win32_UserAccount -Filter "Domain='$env:COMPUTERNAME' AND LocalAccount=True").Where({ $_.SID -match '-500$' })
@@ -259,7 +258,7 @@ Write-Host "Compliant: Built-in Administrator renamed to '$($adminSID.Name)'"
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_200502.png)  
 
-Remediate
+**Remediate:**
 ```
 # Rename built-in Administrator to "labuser"
 
@@ -326,8 +325,8 @@ Write-Host "Verification: Name='$($verify.Name)', SID='$($verify.SID)'"
 Screenshot: ![](images/Screenshot_2025-11-28_201021.png)  
 
 —
-Security event log size and overwrite policy - WN11-AU-000505
-Confirm noncompliance
+## **Security event log size and overwrite policy - WN11-AU-000505**
+**Confirm noncompliance**
 ```
 # Expect max size >= 1GB and overwrite as needed (retention=false)
 $info = wevtutil gl Security
@@ -343,7 +342,7 @@ Write-Host "Compliant: size=$size bytes, retention=$retention"
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_201255.png)   
 
-Remediate
+**Remediate:**
 ```
 # Set Security log max size to 1GB and overwrite as needed
 wevtutil sl Security /ms:1073741824 /rt:false
@@ -353,8 +352,8 @@ Write-Host ($info | Out-String)
 Screenshot: ![](images/Screenshot_2025-11-28_201351.png)  
 
 —
-Audit policy: logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)
-Confirm noncompliance
+## **Audit policy: logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)**
+**Confirm noncompliance**
 ```
 # Compliance check for all Logon/Logoff audit subcategories
 # Run as Administrator
@@ -392,13 +391,13 @@ if ($noncompliant.Count -eq 0) {
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_201522.png)  
 
-Remediate
+**Remediate:**
 I initially tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.
 Screenshot: ![](images/Screenshot_2025-11-28_203934.png)  
 
 —
-Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055
-Confirm noncompliance
+## **Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055**
+**Confirm noncompliance**
 ```
 # Check password age compliance
 # Run elevated
@@ -426,7 +425,7 @@ if ($maxAge -le 60 -and $minAge -ge 1) {
 Screenshot: ![](images/Screenshot_2025-11-28_221543.png)  
 
 
-Remediate
+**Remediate:**
 ```
 cmd /c "net accounts /minpwage:1"
 cmd /c "net accounts /maxpwage:60"
@@ -435,14 +434,14 @@ Screenshot: ![](images/Screenshot_2025-11-28_221933.png)
 
 
 —
-SMBv1 disabled - WN11-00-000160
-Confirm noncompliance
+## **SMBv1 disabled - WN11-00-000160**
+**Confirm noncompliance**
 ```
 Enable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_210202.png)  
 
-Remediate
+**Remediate:**
 ```
 Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart -ErrorAction SilentlyContinue
 $feature = Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
@@ -451,8 +450,8 @@ Write-Host "Applied: SMB1Protocol state is $($feature.State)"
 Screenshot: ![](images/Screenshot_2025-11-28_210343.png)  
 
 —-
-Autoplay Must Be Disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)
-Confirm noncompliance
+## **Autoplay Must Be Disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)**
+**Confirm noncompliance**
 ```
 # Path to Autoplay policy registry key
 $regPath = "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
@@ -475,7 +474,7 @@ catch {
 ```
 Screenshot: ![](images/Screenshot_2025-11-28_215003.png)  
 
-Remediate
+**Remediate:**
 ```
 # Disable Autoplay/Autorun for all drives
 $regPath = "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
@@ -498,8 +497,8 @@ if ($value -eq 255) {
 Screenshot: ![](images/Screenshot_2025-11-28_215111.png)  
 
 —
-Screen saver timeout with secure lock (15 minutes) - WN11-SO-000070
-Confirm noncompliance
+## **Screen saver timeout with secure lock (15 minutes) - WN11-SO-000070**
+**Confirm noncompliance**
 ```
 # STIG usually enforces via Policies path under HKCU
 $base = 'HKCU:\Software\Policies\Microsoft\Windows\Control Panel\Desktop'
@@ -516,7 +515,7 @@ Write-Host "Compliant: Timeout=$timeout, Active=$active, Secure=$secure"
 Screenshot: ![](images/Screenshot_2025-11-28_215307.png)  
 
 
-Remediate
+**Remediate:**
 ```
 $base = 'HKCU:\Software\Policies\Microsoft\Windows\Control Panel\Desktop'
 New-Item -Path $base -Force | Out-Null
