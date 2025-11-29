@@ -34,7 +34,7 @@ else {
     Write-Host "Compliant: MinimumPasswordLength=$minLen"
 }
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_135116.png)
 
 Remediate:
 ```
@@ -121,7 +121,7 @@ MinimumPasswordLength = $Length
 # Execute remediation and verification
 Set-MinPasswordLength -Length 14
 ```
-Screenshot:
+Screenshot:![](images/Screenshot_2025-11-28_135511.png)
 
 —
 Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010
@@ -142,8 +142,11 @@ if ($threshold -lt 10 -and $threshold -ne 0) {
     exit 1
 }
 Write-Host "Compliant: LockoutBadCount=$threshold"
-Screenshot:
+```
+Screenshot: ![](images/Screenshot_2025-11-28_194958.png)
+
 Remediate
+```
 # Remediate LockoutBadCount to 10 and verify
 param(
     [Parameter()][ValidateRange(1,999)][int]$DesiredThreshold = 10
@@ -208,7 +211,7 @@ if ($netThreshold -ge $DesiredThreshold -and $seceditThreshold -ge $DesiredThres
     Write-Host " - Run script elevated"
 }
 ```
-Screenshot:
+Screenshot: ![Screenshot](images/IMG_8452.jpeg)
 
 —
 Guest account disabled - WN11-SO-000010
@@ -226,7 +229,7 @@ try {
     Write-Host "Compliant: Guest account not present"
 }
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_195546.png)
 
 Remediate
 ```
@@ -238,7 +241,7 @@ if (-not $guest) {
 Disable-LocalUser -Name "Guest" -ErrorAction Stop
 Write-Host "Applied: Guest account disabled"
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_195613.png)
 
 
 —
@@ -254,7 +257,8 @@ if ($adminSID.Name -eq 'Administrator') {
 }
 Write-Host "Compliant: Built-in Administrator renamed to '$($adminSID.Name)'"
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_200502.png)  
+
 Remediate
 ```
 # Rename built-in Administrator to "labuser"
@@ -318,11 +322,13 @@ try {
 # Verify by SID again
 $verify = Get-LocalUser | Where-Object { $_.SID -match '-500$' }
 Write-Host "Verification: Name='$($verify.Name)', SID='$($verify.SID)'"
-Screenshot:
+```
+Screenshot: ![](images/Screenshot_2025-11-28_201021.png)  
 
 —
 Security event log size and overwrite policy - WN11-AU-000505
 Confirm noncompliance
+```
 # Expect max size >= 1GB and overwrite as needed (retention=false)
 $info = wevtutil gl Security
 $size = [int]((($info | Select-String 'maxSize:').ToString().Split(':')[1]).Trim())
@@ -335,7 +341,7 @@ if ($size -lt 1073741824 -or $retention -ne 'false') {
 }
 Write-Host "Compliant: size=$size bytes, retention=$retention"
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_201255.png)   
 
 Remediate
 ```
@@ -344,7 +350,7 @@ wevtutil sl Security /ms:1073741824 /rt:false
 $info = wevtutil gl Security
 Write-Host ($info | Out-String)
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_201351.png)  
 
 —
 Audit policy: logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)
@@ -384,11 +390,11 @@ if ($noncompliant.Count -eq 0) {
     $noncompliant | ForEach-Object { Write-Host " - $_" }
 }
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_201522.png)  
 
 Remediate
 I initially tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_203934.png)  
 
 —
 Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055
@@ -417,7 +423,7 @@ if ($maxAge -le 60 -and $minAge -ge 1) {
     exit 1
 }
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_221543.png)  
 
 
 Remediate
@@ -425,7 +431,7 @@ Remediate
 cmd /c "net accounts /minpwage:1"
 cmd /c "net accounts /maxpwage:60"
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_221933.png)  
 
 
 —
@@ -434,7 +440,7 @@ Confirm noncompliance
 ```
 Enable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_210202.png)  
 
 Remediate
 ```
@@ -442,7 +448,7 @@ Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart -Err
 $feature = Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
 Write-Host "Applied: SMB1Protocol state is $($feature.State)"
 ```
-Screenshot
+Screenshot: ![](images/Screenshot_2025-11-28_210343.png)  
 
 —-
 Autoplay Must Be Disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)
@@ -467,7 +473,7 @@ catch {
     Write-Host "Autoplay registry key not found. Default behavior may allow Autoplay."
 }
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_215003.png)  
 
 Remediate
 ```
@@ -489,7 +495,7 @@ if ($value -eq 255) {
     Write-Host "Autoplay STIG compliance: FAILED (value not set to 255)"
 }
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_215111.png)  
 
 —
 Screen saver timeout with secure lock (15 minutes) - WN11-SO-000070
@@ -507,7 +513,7 @@ if ($timeout -lt 900 -or $active -ne '1' -or $secure -ne '1') {
 }
 Write-Host "Compliant: Timeout=$timeout, Active=$active, Secure=$secure"
 ```
-Screenshot:
+Screenshot: ![](images/Screenshot_2025-11-28_215307.png)  
 
 
 Remediate
@@ -519,5 +525,5 @@ Set-ItemProperty -Path $base -Name 'ScreenSaverIsSecure' -Value '1'
 Set-ItemProperty -Path $base -Name 'ScreenSaveTimeOut' -Value '900'
 Write-Host "Applied: Screen saver active, secure, timeout=900 seconds"
 ```
-Screenshot:.
+Screenshot: ![](images/Screenshot_2025-11-28_215340.png)  
 
