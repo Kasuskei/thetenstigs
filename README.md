@@ -4,16 +4,12 @@
 - [Password length policy (minimum 14) - WN11-AC-000035](#password-length-policy-minimum-14---wn11-ac-000035)
 - [Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010](#account-lockout-threshold-eg-10-invalid-attempts---wn11-ac-000010)
 - [Guest account disabled - WN11-SO-000010](#guest-account-disabled---wn11-so-000010)
-<a id="admin-rename"></a>
-- [Administrator account renamed (require NLA-safe custom name) - WN11-SO-000020](#admin-rename)
+- [Administrator account renamed (require NLA-safe custom name) - WN11-SO-000020](#administrator-account-renamed-require-nla-safe-custom-name---wn11-so-000020)
 - [Security event log size and overwrite policy - WN11-AU-000505](#security-event-log-size-and-overwrite-policy---wn11-au-000505)
-<a id="audit-logon-events"></a>
-- [Audit policy logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)](#audit-logon-events)
-<a id="min-password-age"></a>
-- [Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055](#min-password-age)
+- [Audit policy logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)](#audit-policy-logon-events-success-and-failure---wn11-au-000560-successes--wn11-au-000565-failures)
+- [Minimum password age greater than or equal to 1 day - WN11-AC-000055](#minimum-password-age-greater-than-or-equal-to-1-day---wn11-ac-000055)
 - [SMBv1 disabled - WN11-00-000160](#smbv1-disabled---wn11-00-000160)
-<a id="autoplay-disabled"></a>
-- [Autoplay must be disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)](#autoplay-disabled)
+- [Autoplay must be disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)](#autoplay-must-be-disabled---wn11-cc-000190-all-drives--wn11-cc-000180-non-volume-devices)
 - [Screen saver timeout with secure lock (15 minutes) - WN11-SO-000070](#screen-saver-timeout-with-secure-lock-15-minutes---wn11-so-000070)
   
 ## **Password length policy (minimum 14) - WN11-AC-000035**
