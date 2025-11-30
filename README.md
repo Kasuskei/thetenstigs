@@ -408,7 +408,7 @@ Initially I tried to bring the machine into compliance by running local `auditpo
 Screenshot: ![](images/Screenshot_2025-11-28_203934.png)  
 
 
-## **Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055**
+## **Minimum password age greater than or equal to 1 day - WN11-AC-000055**
 **Confirm noncompliance**
 ```
 # Check password age compliance
