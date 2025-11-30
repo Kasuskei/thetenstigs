@@ -1,5 +1,17 @@
 # Windows 11 STIG remediation scripts  
-
+  
+## Table of Contents  
+- [Password length policy (minimum 14) - WN11-AC-000035](#password-length-policy-minimum-14---wn11-ac-000035)
+- [Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010](account-lockout-threshold-10-invalid-attempts---wn11-ac-000010)
+- [Guest account disabled - WN11-SO-000010](guest-account-disabled---wn11-so-000010)
+- [Administrator account renamed (require NLA‑safe custom name) - WN11-SO-000020](administrator-account-renamed-require-nla‑safe-custom-name---wn11-so-000020)
+- [Security event log size and overwrite policy - WN11-AU-000505](security-event-log-size-and-overwrite-policy---wn11-au-000505)
+- [Audit policy: logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)](audit-policy-logon-events-success-and-failure---wn11-au-000560-successes---wn11-au-000565-failures)
+- [Minimum password age ≥ 1 day - STIG ID: WN11-AC-000055](minimum-password-age-1-day---wn11-ac-000055)
+- [SMBv1 disabled - WN11-00-000160](smbv1-disabled---wn11-00-000160)
+- [Autoplay Must Be Disabled - WN11-CC-000190 (all drives) / WN11-CC-000180 (non-volume devices)](autoplay-must-be-disabled---wn11-cc-000190-all-drives---wn11-cc-000180-non-volume-devices)
+- [Screen saver timeout with secure lock (15 minutes) - WN11-SO-000070](screen-saver-timeout-with-secure-lock-15-minutes---wn11-so-000070)
+  
 ## **Password length policy (minimum 14) - WN11-AC-000035**
 **Confirm noncompliance**
 ```
@@ -391,7 +403,7 @@ if ($noncompliant.Count -eq 0) {
 Screenshot: ![](images/Screenshot_2025-11-28_201522.png)  
 
 **Remediate:**
-I initially tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.  
+Initially I tried to bring the machine into compliance by running local `auditpol` scripts, but those changes didn’t stick because advanced audit policy overrides them. I ended up manually enabling Success and Failure auditing for all Logon/Logoff subcategories through local security policy.  
   
 Screenshot: ![](images/Screenshot_2025-11-28_203934.png)  
 
