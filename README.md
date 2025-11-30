@@ -4,7 +4,7 @@
 - [Password length policy (minimum 14) - WN11-AC-000035](#password-length-policy-minimum-14---wn11-ac-000035)
 - [Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010](#account-lockout-threshold-eg-10-invalid-attempts---wn11-ac-000010)
 - [Guest account disabled - WN11-SO-000010](#guest-account-disabled---wn11-so-000010)
-- [Administrator account renamed (require NLA-safe custom name) - WN11-SO-000020](#administrator-account-renamed-require-nla-safe-custom-name---wn11-so-000020)
+- [Administrator account renamed (require NLA safe custom name) - WN11-SO-000020](#administrator-account-renamed-require-nla-safe-custom-name---wn11-so-000020)
 - [Security event log size and overwrite policy - WN11-AU-000505](#security-event-log-size-and-overwrite-policy---wn11-au-000505)
 - [Audit policy logon events (success and failure) - WN11-AU-000560 (Successes) / WN11-AU-000565 (Failures)](#audit-policy-logon-events-success-and-failure---wn11-au-000560-successes--wn11-au-000565-failures)
 - [Minimum password age greater than or equal to 1 day - WN11-AC-000055](#minimum-password-age-greater-than-or-equal-to-1-day---wn11-ac-000055)
@@ -255,7 +255,7 @@ Screenshot: ![](images/Screenshot_2025-11-28_195613.png)
 
 
 
-## **Administrator account renamed (require NLA‑safe custom name) - WN11-SO-000020**
+## **Administrator account renamed (require NLA safe custom name) - WN11-SO-000020**
 **Confirm noncompliance**
 ```
 # Checks if a local account with SID ending -500 (built-in Administrator) still uses name 'Administrator'
