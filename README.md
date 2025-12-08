@@ -1,5 +1,37 @@
 # Windows 11 STIG remediation scripts  
   
+## Overview
+This repository contains PowerShell scripts and documentation for remediating Windows 11 systems against DISA STIG (Security Technical Implementation Guide) findings. Each control includes:
+
+**Detection:** Scripts to confirm noncompliance.  
+**Remediation:** Automated fixes applied via secedit, registry edits, or system commands.  
+**Verification:** Double‑checks compliance after remediation.  
+**Screenshots:** Proof of execution and results.  
+The project demonstrates repeatable, transparent workflows for security hardening and compliance validation.  
+  
+  
+## Features
+PowerShell automation for compliance checks and fixes.  
+INF‑based policy application using `secedit`.  
+Registry and local account management for STIG enforcement.  
+Verification scripts using `net accounts`, `auditpol`, and `wevtutil`.  
+Troubleshooting notes for domain GPO overrides, elevation requirements, and persistence issues.  
+  
+  
+## Example Workflow
+1. Run the confirmation script to check compliance.
+2. If noncompliant, execute the remediation script.
+3. Re‑run the confirmation script to verify compliance.
+4. Review screenshots for proof of execution.
+
+
+## Skills Demonstrated
+**PowerShell scripting** for compliance automation.  
+**Windows security policy management** (`secedit`, `auditpol`, registry).  
+**Troubleshooting** domain GPO overrides and advanced audit policy conflicts.  
+**Documentation** with clear before/after verification and screenshots.  
+  
+    
 ## Table of Contents  
 - [Password length policy (minimum 14) - WN11-AC-000035](#password-length-policy-minimum-14---wn11-ac-000035)
 - [Account lockout threshold (e.g., 10 invalid attempts) - WN11-AC-000010](#account-lockout-threshold-eg-10-invalid-attempts---wn11-ac-000010)
