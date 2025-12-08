@@ -1,4 +1,4 @@
-# Windows 11 STIG remediation scripts  
+# Windows 11 programmatic vulnerability remediation scripts for STIG compliance  
   
 ## Overview
 This repository contains PowerShell scripts and documentation for remediating Windows 11 systems against DISA STIG (Security Technical Implementation Guide) findings. Each control includes:
