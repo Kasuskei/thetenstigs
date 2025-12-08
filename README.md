@@ -572,7 +572,8 @@ Screenshot: ![](images/Screenshot_2025-11-28_215340.png)
   
   
 ## Next Steps  
-Expand coverage to additional STIG controls.
-Package scripts into a modular toolkit for enterprise use.
-Add logging and reporting for compliance audits.
+Expand coverage to additional STIG controls.  
+Package scripts into a modular toolkit for enterprise use.  
+Add logging and reporting for compliance audits.  
 Integrate with configuration management tools (e.g., Ansible, DSC).  
+  
